@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e29975a9c8c2749abe60a210fe9df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
+  speed: 10
   ball: {fileID: 1878562811}
   startingSpot: {x: 0, y: 0, z: 0}
 --- !u!54 &1878562812
@@ -1200,7 +1200,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1878562809}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: edfd11f58546bb6478a472d6b25a66b2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
