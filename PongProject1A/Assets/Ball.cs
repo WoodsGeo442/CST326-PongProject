@@ -4,33 +4,41 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1000)] private float amplify = 1;
-    public ForceMode forceMode;
 
-    private void OnCollisionEnter(Collision collision)
+    public float speed = 5f;
+    public Ball ball;
+    public Vector3 startingSpot;
+
+    // Start is called before the first frame update
+    void Start()
     {
-        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        if (collision.gameObject.tag == "TeamA")
+        startingSpot = ball.transform.position;
+        float nz = Random.Range (0,2) == 0 ? -1 : 1;
+        float ny = Random.Range (0,2) == 0 ? -1 : 1;
+
+        GetComponent<Rigidbody> ().velocity = new Vector3 (0f, speed * ny, speed * nz);
+    }
+
+    public void Reset(bool isGoal1)
+    {
+        if(isGoal1 == true)
         {
-            rb.AddForce(Vector3.up * amplify, forceMode);
+            float nz = Random.Range (0,2) == 0 ? -1 : 1;
+            float ny = Random.Range (0,2) == 0 ? -1 : 1;
+            ball.transform.position = startingSpot;
+            GetComponent<Rigidbody> ().velocity = new Vector3 (0f, speed * ny, speed * nz);
         }
-
-        if (collision.gameObject.tag == "TeamB")
+        else 
         {
-            Vector3 launchAngle = new Vector3(1,1,0) * amplify;
-            rb.AddForce(launchAngle, forceMode);
+            float nz = Random.Range (0,-2) == 0 ? -1 : 1;
+            float ny = Random.Range (0,-2) == 0 ? -1 : 1;
+            ball.transform.position = startingSpot;
+            GetComponent<Rigidbody> ().velocity = new Vector3 (0f, speed * ny, speed * nz);
         }
-
-        //Debug.Log(collision.gameObject.name + " hit me");
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        //Debug.Log(collision.gameObject.name + " is touching me");
+    public void StopBall(){
+        GetComponent<Rigidbody> ().velocity = new Vector3 (0f, 0f, 0f);
     }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        //Debug.Log(collision.gameObject.name + " left me");
-    }
+    
 }
